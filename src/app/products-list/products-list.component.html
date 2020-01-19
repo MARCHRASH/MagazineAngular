@@ -1,0 +1,37 @@
+<a role="button" routerLinkActive="active" (click)='exit()'>Выйти</a>
+<table class="table table-inverse">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Название</th>
+			<th>Цена</th>
+			<th>Количество</th>
+			<th>Добавление в корзину</th>
+			<th *ngIf="role">Удаление</th>
+		</tr>
+	</thead>
+	<tbody *ngFor="let product of products">	
+		<tr>
+			<th>{{product.id}}</th>
+			<th><a [routerLink]="['fullcus', product.id]" role="button" routerLinkActive="active">{{product.name}}</a></th>
+			<th>{{product.price}}</th>
+			<th>{{product.counter}}</th>
+			<th><button class="btn active btn-success" (click)='putInBasket(product)'>В корзину</button></th>
+			<th><button *ngIf="role" class="btn active btn-danger" (click)='deleteProduct(product.id)'>Удалить</button></th>
+		</tr>
+	</tbody>
+</table>
+<hr>
+<div style="display: flex; justify-content: center;" class="form-group">
+	<ul class="pagination">
+		<li class="page-item" *ngFor="let p of pages; let i=index">
+			<a class="page-link active" href="" (click)="setPage(i,$event)" [ngClass]="{'active':i==page}">{{ i }}</a>
+		</li>
+	</ul>
+</div>
+<div style="display: flex; justify-content: center;" class="form-group">
+	<a [routerLink]="['/product']" style="width: 100px; margin: 10px;" class="btn btn-primary active" role="button" routerLinkActive="active">Обновить</a>
+	<a [routerLink]="['/order']" style="width: 100px; margin: 10px;" class="btn btn-primary active" role="button" routerLinkActive="active">Заказы</a>
+	<a *ngIf="role" [routerLink]="['/add']" style="width: 100px; margin: 10px;" class="btn btn-primary active" role="button" routerLinkActive="active">Добавить</a>
+	<a [routerLink]="['/basket']" style="width: 100px; margin: 10px;" class="btn btn-primary active" role="button" routerLinkActive="active">Корзина</a>
+</div>

@@ -1,0 +1,26 @@
+<a role="button" routerLinkActive="active" (click)='exit()'>Выйти</a>
+<div class="container h-100">
+<form (ngSubmit)="onSubmit()">
+	<div style="position: relative;" *ngIf="order">
+	  <div>
+		<label for="userid">Номер пользователя</label>
+		<input type="text" class="form-control" id="userid" name="userid" [(ngModel)]="order.userid" value="{order.userid}" #userid="ngModel" required>
+	  </div>
+	  <div>
+		<label for="productid">Номер продукта</label>
+		<input type="text" class="form-control" id="productid" name="productid" [(ngModel)]="order.productid" value="{order.productid}" #productid="ngModel" required>
+	  </div>
+	  <div>
+		<label for="counter">Количество</label>
+		<input type="text" class="form-control" id="counter" name="counter" [(ngModel)]="order.counter" value="{order.counter}" #counter="ngModel" required>
+	  </div>
+	</div>
+	<br>
+	<div class="form-group"><label class="form-control">{{message}}</label></div>
+	<br>
+	<div style="display: flex; justify-content: center;" class="form-group">
+		<button [disabled]="userid.invalid || productid.invalid || counter.invalid" type="submit" style="width: 100%;" class="btn btn-success">Сохранить</button>
+	</div>
+	<a [routerLink]="['/order/fullcus', id]" style="width: 100%; " class="btn btn-primary active" role="button" routerLinkActive="active">Назад</a>
+</form>
+</div>

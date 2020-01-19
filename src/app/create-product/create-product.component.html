@@ -1,0 +1,22 @@
+<a role="button" routerLinkActive="active" (click)='exit()'>Выйти</a>
+<div [hidden]="submitted" class="container h-100 form-group">
+  <form (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="name">Название</label>
+      <input type="text" class="form-control" id="name" name="name" [(ngModel)]="product.name" #name="ngModel" required>
+    </div>
+	
+	<div class="form-group">
+      <label for="price">Цена</label>
+      <input type="text" class="form-control" id="price" name="price" [(ngModel)]="product.price" #price="ngModel" required>
+    </div>
+	
+	<div class="form-group">
+      <label for="counter">Количество</label>
+      <input type="text" class="form-control" id="counter" name="counter" [(ngModel)]="product.counter" #counter="ngModel" required>
+    </div>
+
+    <button [disabled]="name.invalid || price.invalid || counter.invalid" type="submit" style="width: 100%;" class="btn btn-success">Добавить</button>
+  </form>
+</div>
