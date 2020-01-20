@@ -61,10 +61,7 @@ export class OrdersListComponent implements OnInit {
         },
         error => console.log(error));
   }
-
-  /*reloadData() {
-    this.documents = this.documentService.getDocumentsList();
-  }*/
+  
   reloadData()
   {	
 	const userid = JSON.parse(localStorage.getItem('userId'));

@@ -74,14 +74,6 @@ export class OrderService {
   postOutBasket(basketProduct: BasketProduct): Observable<any> {
     return this.http.post(this.baseTest+'/outbasket', basketProduct);
   }
-  
-  /*getPageDocumentsListAuthorSort(page: number): Observable<any> {
-    return this.http.get(this.baseTest+'/documents/author?page='+page);
-  }*/
-  
-  /*getPageProductsListAuthorSort(page: number, field: string): Observable<any> {
-    return this.http.get(this.baseTest+'/documents/author?page='+page+'&field='+field);
-  }*/
 
   deleteAll(): Observable<any> {
     return this.http.delete(`${this.baseUrl}` + `/delete`, { responseType: 'text' });

@@ -39,14 +39,6 @@ export class ProductService {
   getPageProductsList(page: number) {//: Observable<any> {
     return this.http.get(this.baseTest+'/products?page='+page);
   }
-  
-  /*getPageDocumentsListAuthorSort(page: number): Observable<any> {
-    return this.http.get(this.baseTest+'/documents/author?page='+page);
-  }*/
-  
-  /*getPageProductsListAuthorSort(page: number, field: string): Observable<any> {
-    return this.http.get(this.baseTest+'/documents/author?page='+page+'&field='+field);
-  }*/
 
   deleteAll(): Observable<any> {
     return this.http.delete(`${this.baseUrl}` + `/delete`, { responseType: 'text' });

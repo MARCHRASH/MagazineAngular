@@ -45,30 +45,7 @@ export class BasketComponent implements OnInit {
 		  console.log(error.error.message);
 	});
   }
-
-  /*deleteProducts() {
-    this.productService.deleteAll()
-      .subscribe(
-        data => {
-          console.log(data);
-          this.reloadData();
-        },
-        error => console.log('ERROR: ' + error));
-  }
   
-  deleteProduct(id: number) {
-    this.productService.deleteProduct(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.reloadData();
-        },
-        error => console.log(error));
-  }*/
-
-  /*reloadData() {
-    this.documents = this.documentService.getDocumentsList();
-  }*/
   reloadData()
   {	
 	this.orderService.getBasket().subscribe(

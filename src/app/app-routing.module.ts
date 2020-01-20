@@ -17,7 +17,6 @@ const routes: Routes = [
 	{ path: '', redirectTo: 'authenticated', pathMatch: 'full' },
 	{ path: 'authenticated', component: AuthenticatedComponent },
 	{ path: 'registration', component: RegistrationComponent },
-   // { path: '', redirectTo: 'document', pathMatch: 'full' },
     { path: 'basket', component: BasketComponent, canActivate: [AuthGuard] },
     { path: 'product', component: ProductsListComponent, canActivate: [AuthGuard] },
     { path: 'add', component: CreateProductComponent, canActivate: [AuthGuard] },

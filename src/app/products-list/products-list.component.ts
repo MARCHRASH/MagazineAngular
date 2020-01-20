@@ -72,9 +72,6 @@ export class ProductsListComponent implements OnInit {
 		});
   }
 
-  /*reloadData() {
-    this.documents = this.documentService.getDocumentsList();
-  }*/
   reloadData()
   {	
 	const userid = JSON.parse(localStorage.getItem('userId'));
