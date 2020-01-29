@@ -1,0 +1,34 @@
+<html>
+	<body>
+		
+		<div class="form-group" style="width: 40%; margin-left: auto; margin-right: auto;">
+			<form method="post" name="form" #f="ngForm" >
+			
+				<div style="position: relative;">
+					<div>
+						<label>Название продукта </label>
+						<input class="form-control" name="productName" readonly [(ngModel)]="form.productName">
+					</div>
+					<div>
+						<label>Заказанное количество </label>
+						<input class="form-control" name="counterProduct" readonly [(ngModel)]="form.counterProduct">
+					</div>
+					<div>
+						<label>Пользователь </label>
+						<input class="form-control" name="user.username" readonly [(ngModel)]="form.user.username">
+					</div>
+					<div>
+						<label>Имя пользователя </label>
+						<input class="form-control" name="user.name" readonly [(ngModel)]="form.user.name">
+					</div>
+					<br>
+					<div style="display: flex; justify-content: center;" class="form-group">
+						<button style="width: 100%;" class="btn btn-success" routerLink="/admin" routerLinkActive="active">Назад</button>
+					</div>
+				</div>
+				
+			</form>
+		</div>
+		
+	</body>
+</html>

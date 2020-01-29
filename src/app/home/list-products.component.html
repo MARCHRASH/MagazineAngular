@@ -1,0 +1,51 @@
+<div *ngIf="info.token; else loggedOut">
+	<form method="post"  name="form" #f="ngForm">
+	
+		<table ng-table="products" class="table table-inverse">			
+			<thead>
+				<tr>
+					<th scope="col" sortable="name" (sort)="onSort($event)"><button>Название</button></th>
+					<th sortable="price" (sort)="onSort($event)"><button>Цена</button></th> 
+					<th sortable="counter" (sort)="onSort($event)"><button>Количество</button></th>
+					<th>Добавить в корзину</th>
+					<th>Подробнее</th>
+					<th *ngIf="authority === 'admin'" >Удалить</th>
+				</tr>
+			</thead>
+			<tr *ngFor="let product of products;let i=index">  
+				<td>{{product.name}}</td>
+				<td>{{product.price}}</td>
+				<td>{{product.counter}}</td>
+				<td><button class="btn btn-success" (click)='inBasket(product)'>В корзину</button></td>
+				<td><a [routerLink]="['/edit', product.id]" style="width: 100px; margin: 10px;" class="btn btn-primary active" role="button" routerLinkActive="active">Показать</a></td>
+				<td *ngIf="authority === 'admin'" ><button *ngIf="authority === 'admin'" class="btn btn-danger active" (click)='deleteProd(product.id)'>Удалить</button></td>
+			</tr>
+		</table>
+		
+		<label>{{ errorMessage }}</label>
+		
+		<div style="display: flex; justify-content: center;">
+			<div style="margin-right: 15px;">
+				<p>Фильтр : <input style="width:200px;" type="text" name="filt" [(ngModel)]="filt"></p>
+				<button style="margin-right: 15px; width:260px;" class="btn btn-success active" (click)="filter()">Фильровать</button>
+			</div>
+		</div>
+	
+		<nav aria-label="Page">
+			<ul class="pagination">
+				<li class="page-item" *ngFor="let p of pages; let i=index">
+					<a class="page-link active" href="" (click)="setPage(i,$event)" [ngClass]="{'active':i==page}">{{i}}</a>
+				</li>
+			</ul>
+		</nav>
+		
+	</form>
+	
+	<div style="display: flex; justify-content: center;" class="form-group">
+		<button routerLink="/basket" style="width: 100px; margin: 10px;" class="btn btn-success active" routerLinkActive="active">Корзина</button>
+		<button *ngIf="authority === 'admin'" style="width: 100px; margin: 10px;" class="btn btn-warning active" routerLink="/add" routerLinkActive="active">Добавить</button>
+		<button  (click)="logout()" style="width: 100px; margin: 10px;" class="btn btn-danger active" >Выход</button>
+		<button *ngIf="authority === 'admin'" style="width: 100px; margin: 10px;" class="btn btn-info active" (click)="printProducts()">Печать</button>
+	</div>
+	
+</div>

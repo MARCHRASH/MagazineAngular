@@ -1,0 +1,41 @@
+<div *ngIf="info.token; else loggedOut">
+	<form method="post"  name="form" #f="ngForm">
+  
+		<table  ng-table="basketProducts" class="table table-inverse">			
+			<thead>
+				<tr>
+					<th scope="col" sortable="nameprod" (sort)="onSort($event)"><button>Название</button></th>
+					<th sortable="priceprod" (sort)="onSort($event)"><button>Цена</button></th> 
+					<th sortable="counterprod" (sort)="onSort($event)"><button>Добавлено в количестве</button></th>
+					<th>Заказать товары</th>
+					<th>Убрать из корзины</th>
+				</tr>
+			</thead>
+			<tr *ngFor="let basketProduct of basketProducts">
+				<td>{{basketProduct.nameprod}}</td>
+				<td>{{basketProduct.priceprod}}</td>
+				<td>{{basketProduct.counterprod}}</td>
+				<td><button class="btn btn-success" (click)='confirmedOrder(basketProduct)'>Заказать</button></td>
+				<td><button class="btn btn-danger" (click)='removeFromBasket(basketProduct)'>Убрать</button></td>
+			</tr>
+		</table>
+		
+		<label>{{ errorMessage }}</label>
+		
+		<div style="display: flex; justify-content: center;">
+			<div style="margin-right: 15px;">
+				<p>Фильтр : <input style="width:200px;" type="text" name="filt" [(ngModel)]="filt"></p>
+				<button style="margin-right: 15px; width:260px;" class="btn btn-success active" (click)="filter()">Фильровать</button>
+			</div>
+		</div>
+		
+	</form>
+	
+	<br>
+	
+	<div style="display: flex; justify-content: center;" class="form-group">
+		<button style="width: 100px; margin: 10px;" class="btn btn-warning active" routerLink="/products" >Назад</button>
+		<button style="width: 100px; margin: 10px;" class="btn btn-danger active" (click)="logout()">Выход</button>
+	</div>
+	
+</div>

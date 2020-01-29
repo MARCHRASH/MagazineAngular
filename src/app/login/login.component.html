@@ -1,0 +1,29 @@
+<div *ngIf="isLoggedIn; else loggedOut"></div>
+<ng-template #loggedOut>
+		<form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+			<div class="form-group" style="width: 40%; margin-left: auto; margin-right: auto;">
+				<div>
+					<label for="username">Логин</label>
+				</div>
+				<input type="text" class="form-control input_data" name="username" [(ngModel)]="form.username" #username="ngModel" required />
+				<div *ngIf="f.submitted && username.invalid">
+					<div *ngIf="username.errors.required">Данный логин уже используется</div>
+				</div>
+			</div>
+			<div class="form-group" style="width: 40%; margin-left: auto; margin-right: auto;">
+				<div>
+					<label for="password">Пароль</label>
+				</div>
+				<input type="password" class="form-control input_data" name="password" [(ngModel)]="form.password" #password="ngModel" required />
+			</div>
+			<div class="form-group" style="width: 40%; margin-left: auto; margin-right: auto;">
+				<button style="width: 100%;" class="btn btn-primary input_data">Авторизироваться</button>
+				<div *ngIf="f.submitted && isLoginFailed" style="width: 100%;" class="alert alert-danger">
+					Ошибка авторизации: {{errorMessage}}
+				</div>
+			</div>
+		</form>
+		<div class="form-group" style="width: 40%; margin-left: auto; margin-right: auto;">
+			<a href="signup" style="width: 100%;" class="btn btn-primary active">Регистрация</a>
+		</div>
+</ng-template>
