@@ -4,35 +4,6 @@ import {AuthService} from '../auth/auth.service';
 import {Order} from '../order/order';
 import { ActivatedRoute} from '@angular/router';
 
- 
-export type sortDirection='asc'|'desc'|'';
-const rotate: {[key: string]: sortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
-export const compare = (v1, v2) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
-export interface SortEvent{
-  column:string;
-  direction:sortDirection;
-}
-
-@Directive({
-  selector: 'th[sortable]',
-  host: {
-    '[class.asc]': 'direction === "asc"',
-    '[class.desc]': 'direction === "desc"',
-    '(click)': 'rotate()'
-  }
-})
-export class NgbdSortableHeader {
-
-  @Input() sortable: string;
-  @Input() direction: sortDirection = '';
-  @Output() sort = new EventEmitter<SortEvent>();
-
-  rotate() {
-    this.direction = rotate[this.direction];
-    this.sort.emit({column: this.sortable, direction: this.direction});
-  }
-}
-
 @Component({
   selector: 'admin',
   templateUrl: './admin.component.html'
@@ -48,30 +19,74 @@ export class AdminComponent implements OnInit {
 	private page:number=0;
 	sortDirection:string='';
 	errorMessage: string;
-	@ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
+	
+	private sortCheck : boolean = true;
 	
 	constructor(private token: TokenStorageService,private http:AuthService, private route:ActivatedRoute) { 
 	}
 	
 	private order:Order;
-	onSort({column, direction}: SortEvent) {
-
-    // resetting other headers
-		this.headers.forEach(header => {
-			if (header.sortable !== column) {
-				header.direction = '';
+	
+	sorting(column: number) {
+		if(this.sortCheck) {
+			if(column===1) {
+				this.orders.sort((a, b) => {
+					if (a.productName>b.productName) {
+						return 1;
+					}
+					if (a.productName<b.productName) {
+						return -1;
+					}
+					return 0;
+				});
 			}
-		});
-    
-    // sorting orders
-		if (direction === '') {
-			this.orders = this.orders;
-		} 
-		else {
-			this.orders = [...this.orders].sort((a, b) => {
-				const res = compare(a[column], b[column]);
-				return direction === 'asc' ? res : -res;
-			});
+			if(column===2) {
+				this.orders.sort((a, b) => {
+					return a.counterProduct-b.counterProduct;
+				});
+			}
+			if(column===3) {
+				this.orders.sort((a, b) => {
+					if (a.user.name>b.user.name) {
+						return 1;
+					}
+					if (a.user.name<b.user.name) {
+						return -1;
+					}
+					return 0;
+				});
+			}
+			this.sortCheck = false;
+		}
+		else if(!this.sortCheck) {
+			if(column===1) {
+				this.orders.sort((a, b) => {
+					if (a.productName>b.productName) {
+						return -1;
+					}
+					if (a.productName<b.productName) {
+						return 1;
+					}
+					return 0;
+				});
+			}
+			if(column===2) {
+				this.orders.sort((a, b) => {
+					return b.counterProduct-a.counterProduct;
+				});
+			}
+			if(column===3) {
+				this.orders.sort((a, b) => {
+					if (a.user.name>b.user.name) {
+						return -1;
+					}
+					if (a.user.name<b.user.name) {
+						return 1;
+					}
+					return 0;
+				});
+			}
+			this.sortCheck = true;
 		}
 	}
 	

@@ -5,9 +5,9 @@
 			<table ng-table="orders" class="table table-inverse">			
 				<thead>
 					<tr>
-						<th scope="col" sortable="productName" (sort)="onSort($event)"><button>Название продукта</button></th>
-						<th sortable="counterProduct" (sort)="onSort($event)"><button>Заказанное количество</button></th>
-						<th sortable="user.name" (sort)="onSort($event)"><button>Пользователь</button></th>
+						<th><button (click)='sorting(1)'>Название продукта</button></th>
+						<th><button (click)='sorting(2)'>Заказанное количество</button></th>
+						<th><button (click)='sorting(3)'>Пользователь</button></th>
 						<th>Посмотреть</th>
 					</tr>
 				</thead>

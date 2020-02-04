@@ -4,9 +4,9 @@
 		<table ng-table="products" class="table table-inverse">			
 			<thead>
 				<tr>
-					<th scope="col" sortable="name" (sort)="onSort($event)"><button>Название</button></th>
-					<th sortable="price" (sort)="onSort($event)"><button>Цена</button></th> 
-					<th sortable="counter" (sort)="onSort($event)"><button>Количество</button></th>
+					<th><button (click)='sorting(1)'>Название</button></th>
+					<th><button (click)='sorting(2)'>Цена</button></th> 
+					<th><button (click)='sorting(3)'>Количество</button></th>
 					<th>Добавить в корзину</th>
 					<th>Подробнее</th>
 					<th *ngIf="authority === 'admin'" >Удалить</th>

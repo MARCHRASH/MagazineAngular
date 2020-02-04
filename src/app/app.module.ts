@@ -14,14 +14,14 @@ import { AdminComponent } from './admin/admin.component';
 import { httpInterceptorProviders } from './auth/auth-interceptor';
 import { ProductsEdit } from './home/edit-products.component';
 import { ProductsAdd } from './home/add-products.component';
-import {NgbdSortableHeader} from './home/list-products.component';
 import { OrdersShow } from './admin/show-orders.component';
 
 import { BasketList } from './basket/basket.component';
 import { OrderList } from './order/list-order.component';
 
 @NgModule({
-  declarations: [ AppComponent, NgbdSortableHeader, ProductsAdd, LoginComponent, UserComponent, RegisterComponent, ProductsList, AdminComponent, ProductsEdit, OrdersShow, BasketList, OrderList ],
+  declarations: [ AppComponent, ProductsAdd, LoginComponent, UserComponent, RegisterComponent,
+  ProductsList, AdminComponent, ProductsEdit, OrdersShow, BasketList, OrderList ],
   imports: [ BrowserModule, AppRoutingModule, FormsModule, HttpClientModule ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

@@ -6,35 +6,6 @@ import {BasketProduct} from './basketproduct';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-
-export type sortDirection='asc'|'desc'|'';
-const rotate: {[key: string]: sortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
-export const compare = (v1, v2) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
-export interface SortEvent{
-  column:string;
-  direction:sortDirection;
-}
-
-@Directive({
-  selector: 'th[sortable]',
-  host: {
-    '[class.asc]': 'direction === "asc"',
-    '[class.desc]': 'direction === "desc"',
-    '(click)': 'rotate()'
-  }
-})
-export class NgbdSortableHeader {
-
-  @Input() sortable: string;
-  @Input() direction: sortDirection = '';
-  @Output() sort = new EventEmitter<SortEvent>();
-
-  rotate() {
-    this.direction = rotate[this.direction];
-    this.sort.emit({column: this.sortable, direction: this.direction});
-  }
-}
-
 @Component({
   selector: 'basket',
   templateUrl: './basket.component.html'
@@ -47,25 +18,59 @@ export class BasketList implements OnInit {
 	info:any;
 	errorMessage: string;
 	
-	@ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
+	private sortCheck : boolean = true;
+	
 	constructor(private token: TokenStorageService, private http: AuthService) { 
 	}
 	
-	onSort({column, direction}: SortEvent) {
-		// resetting other headers
-		this.headers.forEach(header => {
-			if (header.sortable !== column) {
-				header.direction = '';
+	sorting(column: number) {
+		if(this.sortCheck) {
+			if(column===1) {
+				this.basketProducts.sort((a, b) => {
+					if (a.nameprod>b.nameprod) {
+						return 1;
+					}
+					if (a.nameprod<b.nameprod) {
+						return -1;
+					}
+					return 0;
+				});
 			}
-		});
-		// sorting products
-		if (direction === '') {
-			this.basketProducts = this.basketProducts;
-		} else {
-			this.basketProducts = [...this.basketProducts].sort((a, b) => {
-				const res = compare(a[column], b[column]);
-				return direction === 'asc' ? res : -res;
-			});
+			if(column===2) {
+				this.basketProducts.sort((a, b) => {
+					return a.priceprod-b.priceprod;
+				});
+			}
+			if(column===3) {
+				this.basketProducts.sort((a, b) => {
+					return a.counterprod-b.counterprod;
+				});
+			}
+			this.sortCheck = false;
+		}
+		else if(!this.sortCheck) {
+			if(column===1) {
+				this.basketProducts.sort((a, b) => {
+					if (a.nameprod>b.nameprod) {
+						return -1;
+					}
+					if (a.nameprod<b.nameprod) {
+						return 1;
+					}
+					return 0;
+				});
+			}
+			if(column===2) {
+				this.basketProducts.sort((a, b) => {
+					return b.priceprod-a.priceprod;
+				});
+			}
+			if(column===3) {
+				this.basketProducts.sort((a, b) => {
+					return b.counterprod-a.counterprod;
+				});
+			}
+			this.sortCheck = true;
 		}
 	}
 	

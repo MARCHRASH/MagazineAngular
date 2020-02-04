@@ -4,9 +4,9 @@
 		<table  ng-table="basketProducts" class="table table-inverse">			
 			<thead>
 				<tr>
-					<th scope="col" sortable="nameprod" (sort)="onSort($event)"><button>Название</button></th>
-					<th sortable="priceprod" (sort)="onSort($event)"><button>Цена</button></th> 
-					<th sortable="counterprod" (sort)="onSort($event)"><button>Добавлено в количестве</button></th>
+					<th><button (click)='sorting(1)'>Название</button></th>
+					<th><button (click)='sorting(2)'>Цена</button></th> 
+					<th><button (click)='sorting(3)'>Добавлено в количестве</button></th>
 					<th>Заказать товары</th>
 					<th>Убрать из корзины</th>
 				</tr>
