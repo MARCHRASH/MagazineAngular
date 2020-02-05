@@ -18,12 +18,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
 
-  ngOnInit() {
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getAuthorities();
-    }
-  }
+  ngOnInit() {}
 
   onSubmit() {
     console.log(this.form);

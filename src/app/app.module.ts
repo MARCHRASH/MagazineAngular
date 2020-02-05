@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
 import { ProductsList } from './home/list-products.component';
 import { AdminComponent } from './admin/admin.component';
@@ -20,7 +19,7 @@ import { BasketList } from './basket/basket.component';
 import { OrderList } from './order/list-order.component';
 
 @NgModule({
-  declarations: [ AppComponent, ProductsAdd, LoginComponent, UserComponent, RegisterComponent,
+  declarations: [ AppComponent, ProductsAdd, LoginComponent, RegisterComponent,
   ProductsList, AdminComponent, ProductsEdit, OrdersShow, BasketList, OrderList ],
   imports: [ BrowserModule, AppRoutingModule, FormsModule, HttpClientModule ],
   providers: [httpInterceptorProviders],
